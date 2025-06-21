@@ -128,7 +128,7 @@ function initAdsense() {
         setTimeout(() => {
             // Only select elements that don't already have any status attribute set
             // This avoids the "already have ads in them" error
-            const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status]):not([data-init-attempt])');
+            const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status]):not([data-ad-status]):not([data-init-attempt])');
             
             if (adElements.length === 0) {
                 console.log('No uninitiated AdSense elements found to initialize');
@@ -142,8 +142,11 @@ function initAdsense() {
                 setTimeout(() => {
                     try {
                         // Check again if the ad has been initialized in the meantime
-                        if (ad.hasAttribute('data-adsbygoogle-status') || ad.hasAttribute('data-init-attempt')) {
-                            console.log('Ad already initialized, skipping.');
+                        if (ad.hasAttribute('data-adsbygoogle-status') || 
+                            ad.hasAttribute('data-ad-status') || 
+                            ad.hasAttribute('data-init-attempt') ||
+                            ad.innerHTML.trim() !== '') {
+                            console.log('Ad already initialized or not empty, skipping.');
                             return;
                         }
                         
@@ -157,15 +160,30 @@ function initAdsense() {
                             if (!ad.style.minHeight) ad.style.minHeight = '250px';
                         }
                         
-                        (adsbygoogle = window.adsbygoogle || []).push({});
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                            console.log('Ad push successful for element', ad);
+                        } catch (pushError) {
+                            // If we get an "already have ads" error, mark this element
+                            console.error('Error pushing ad:', pushError.message || pushError);
+                            ad.setAttribute('data-init-error', pushError.message || 'push-error');
+                            
+                            // If we get the specific "already have ads" error, mark all ads as attempted
+                            if (pushError.message && pushError.message.includes('already have ads')) {
+                                document.querySelectorAll('.adsbygoogle:not([data-init-attempt])').forEach(el => {
+                                    el.setAttribute('data-init-attempt', 'blocked-by-error');
+                                });
+                                console.warn('Marked all remaining ads as attempted due to "already have ads" error');
+                            }
+                        }
                     } catch (innerErr) {
-                        console.error('Error pushing individual ad:', innerErr);
+                        console.error('Error in ad initialization process:', innerErr);
                         // Mark the ad as having an error
                         ad.setAttribute('data-init-error', 'true');
                     }
-                }, index * 100); // Stagger initializations to reduce race conditions
+                }, index * 150); // Slightly longer stagger to reduce race conditions
             });
-        }, 200); // Short delay to ensure DOM is fully loaded
+        }, 300); // Slightly longer delay to ensure DOM is fully loaded
     } catch (e) {
         console.error('AdSense initialization error:', e);
     }
