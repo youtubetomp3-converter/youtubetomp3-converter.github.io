@@ -20,9 +20,11 @@
     <meta name="twitter:description"
         content="Convert YouTube videos to MP3 files instantly. Free, fast and high-quality YouTubeToMP3 converter.">
     <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#d32f2f">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    <meta name="theme-color" content="#d32f2f">    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Storage access detection script - helps handle privacy-focused browsers -->
+    <script src="storage-access.js"></script>
+    <script async custom-element="amp-auto-ads" src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
     </script>
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     <!-- Google AdSense Script -->
@@ -34,20 +36,42 @@
     <!-- Add additional meta tags for privacy -->
     <meta http-equiv="Permissions-Policy" content="interest-cohort=()">
     <!-- Indicate that we respect Do Not Track -->
-    <meta name="respect-dnt" content="true">
-    <script>
+    <meta name="respect-dnt" content="true">    <script>
         // Register Service Worker for better offline experience
         if ('serviceWorker' in navigator) {
             // Only register the service worker if we're on HTTP/HTTPS, not on file:// protocol
             if (window.location.protocol.includes('http')) {
                 window.addEventListener('load', () => {
-                    // Use a relative path instead of absolute path
+                    // Check if the browser is likely to block storage access
+                    const checkStorageAccess = function() {
+                        try {
+                            const testAccess = !!(window.storageAccess && 
+                                (window.storageAccess.localStorage || 
+                                window.storageAccess.cacheAPI));
+                            return testAccess;
+                        } catch (e) {
+                            return false;
+                        }
+                    };
+                    
+                    // Register service worker with better error handling
                     navigator.serviceWorker.register('sw.js')
                         .then(registration => {
                             console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                            
+                            // Check for storage access limitations
+                            if (!checkStorageAccess()) {
+                                console.warn('Limited storage access detected - Service Worker functionality may be limited');
+                            }
                         })
                         .catch(error => {
                             console.log('ServiceWorker registration failed: ', error);
+                            if (error.name === 'SecurityError' || 
+                                error.name === 'NotSupportedError' || 
+                                error.message.includes('storage') || 
+                                error.message.includes('permission')) {
+                                console.warn('Service Worker registration likely failed due to privacy settings');
+                            }
                         });
                 });
             } else {
