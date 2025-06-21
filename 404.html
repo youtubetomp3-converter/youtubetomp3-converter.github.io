@@ -23,9 +23,10 @@
                 }
             }
         })();
-    </script>
-    <!-- Google AdSense Script -->
+    </script>    <!-- Google AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7438590583270235" crossorigin="anonymous"></script>
+    <!-- AdSense Helper - improves error handling during approval process -->
+    <script async src="adsense-helper.js"></script>
     <style>
         .not-found-container {
             text-align: center;
@@ -124,18 +125,11 @@
             <p class="copyright">© 2025 YouTube to MP3 Converter. All rights reserved.</p>
         </div>
     </div>
-    
-    <!-- Initialize AdSense ads after page is loaded -->
+      <!-- Initialize AdSense ads after page is loaded -->
     <script>
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                try {
-                    // Push AdSense ads after the page is fully loaded with a slight delay
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                } catch (e) {
-                    console.error('AdSense initialization error:', e);
-                }
-            }, 100); // Small delay to ensure elements are properly sized
+            // The initialization will be handled by adsense-helper.js
+            // No additional push calls needed here
         });
     </script>
     

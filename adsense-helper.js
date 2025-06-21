@@ -124,28 +124,48 @@ function initAdsense() {
             return;
         }
 
-        // Only select elements that don't already have a status attribute set
-        // This avoids the "already have ads in them" error
-        const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
-        
-        if (adElements.length === 0) {
-            console.log('No uninitiated AdSense elements found to initialize');
-            return;
-        }
-        
-        console.log(`Initializing ${adElements.length} AdSense ad units`);
-
-        adElements.forEach(ad => {
-            try {
-                // Add a specific data attribute to track our initialization attempt
-                ad.setAttribute('data-init-attempt', 'true');
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            } catch (innerErr) {
-                console.error('Error pushing individual ad:', innerErr);
-                // Mark the ad as having an error
-                ad.setAttribute('data-init-error', 'true');
+        // Wait a short moment to ensure all page elements are fully loaded and rendered
+        setTimeout(() => {
+            // Only select elements that don't already have any status attribute set
+            // This avoids the "already have ads in them" error
+            const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status]):not([data-init-attempt])');
+            
+            if (adElements.length === 0) {
+                console.log('No uninitiated AdSense elements found to initialize');
+                return;
             }
-        });
+            
+            console.log(`Initializing ${adElements.length} AdSense ad units`);
+
+            // Process one ad at a time with a small delay between them
+            adElements.forEach((ad, index) => {
+                setTimeout(() => {
+                    try {
+                        // Check again if the ad has been initialized in the meantime
+                        if (ad.hasAttribute('data-adsbygoogle-status') || ad.hasAttribute('data-init-attempt')) {
+                            console.log('Ad already initialized, skipping.');
+                            return;
+                        }
+                        
+                        // Add a specific data attribute to track our initialization attempt
+                        ad.setAttribute('data-init-attempt', 'true');
+                        
+                        // Make sure parent container is visible with adequate size
+                        if (ad.parentElement) {
+                            ad.parentElement.style.display = 'block';
+                            if (!ad.style.minWidth) ad.style.minWidth = '250px';
+                            if (!ad.style.minHeight) ad.style.minHeight = '250px';
+                        }
+                        
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    } catch (innerErr) {
+                        console.error('Error pushing individual ad:', innerErr);
+                        // Mark the ad as having an error
+                        ad.setAttribute('data-init-error', 'true');
+                    }
+                }, index * 100); // Stagger initializations to reduce race conditions
+            });
+        }, 200); // Short delay to ensure DOM is fully loaded
     } catch (e) {
         console.error('AdSense initialization error:', e);
     }
