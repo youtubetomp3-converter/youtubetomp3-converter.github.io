@@ -199,9 +199,9 @@
             setTimeout(function() {
                 try {
                     // Get all ad containers
-                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
                     
-                    // Push each ad individually
+                    // Only push ads that haven't been initialized yet
                     adElements.forEach(function(adElement) {
                         // Make sure the parent container is visible and has proper dimensions
                         if (adElement.parentElement) {
