@@ -61,7 +61,7 @@ function checkAdSenseStatus() {
     testAd.style.width = '1px';
     testAd.style.height = '1px';
     testAd.setAttribute('data-ad-client', 'ca-pub-7438590583270235');
-    testAd.setAttribute('data-ad-slot', 'test');
+    testAd.setAttribute('data-ad-slot', '1787237657');
     document.body.appendChild(testAd);
 
     // Check the AdSense status of the test element
