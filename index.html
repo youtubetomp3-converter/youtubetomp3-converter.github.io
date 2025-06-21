@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">      <meta name="description" content="Free YouTube to MP3 converter - Convert and download YouTube videos to high-quality MP3 audio files quickly, easily, and for free. Best online YouTube to MP3 tool.">
+    <meta name="keywords" content="YouTube to MP3, YouTube converter, MP3 converter, download YouTube audio, YouTube MP3 extractor, YouTube to MP3 online, convert YouTube video to MP3, free YouTube to MP3, youtubetomp3, youtube to mp3 converter">
+    <link rel="canonical" href="https://vineethwilson15.github.io/">
+    <title>YouTubeToMP3 Converter - Download High Quality Audio | Free Online Tool</title>    <meta property="og:title" content="YouTubeToMP3 Converter - Download High Quality Audio">
+    <meta property="og:description" content="Free online tool to convert YouTube videos to high-quality MP3 files quickly and easily. Best YouTubeToMP3 converter online.">
+    <meta property="og:url" content="https://vineethwilson15.github.io/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="YouTubeToMP3 Converter - Free Online Tool">
+    <meta name="twitter:description" content="Convert YouTube videos to MP3 files instantly. Free, fast and high-quality YouTubeToMP3 converter.">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#d32f2f">    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7438590583270235" crossorigin="anonymous"></script><script>
+        // Register Service Worker for better offline experience
+        if ('serviceWorker' in navigator) {
+            // Only register the service worker if we're on HTTP/HTTPS, not on file:// protocol
+            if (window.location.protocol.includes('http')) {
+                window.addEventListener('load', () => {
+                    // Use a relative path instead of absolute path
+                    navigator.serviceWorker.register('sw.js')
+                        .then(registration => {
+                            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                        })
+                        .catch(error => {
+                            console.log('ServiceWorker registration failed: ', error);
+                        });
+                });
+            } else {
+                console.log('Service Worker not registered: Running from file:// protocol');
+                // Display a message to inform users they're running from filesystem
+                window.addEventListener('load', () => {
+                    const messageDiv = document.getElementById('message');
+                    if (messageDiv) {
+                        messageDiv.textContent = 'Note: Running from local file system. For full features, deploy to a web server or GitHub Pages.';
+                        messageDiv.className = 'message info';
+                        messageDiv.style.display = 'block';
+                    }
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <amp-auto-ads type="adsense"
+        data-ad-client="ca-pub-7438590583270235">
+    </amp-auto-ads>    <div class="container">        <div id="welcome-banner" class="welcome-message">Welcome to YouTubeToMP3 - Your Free YouTube to MP3 Converter of Choice!</div>
+        <h1>YouTubeToMP3 Converter - Free Online Tool</h1><div class="converter-box">
+            <div class="input-group">
+                <input type="text" id="youtube-url" placeholder="Paste YouTube URL here...">
+                <button id="convert-btn">Convert to MP3</button>
+            </div>            <div class="duration-info">
+                <p>Maximum video length: 10 minutes</p>
+                <p class="api-note">This application uses free API services with limited quotas. If conversion fails, please try again later.</p>
+            </div>            <!-- AdSense Ad Container (Top) -->
+            <div class="ad-container" id="ad-container-top">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block; min-width:250px; width:100%; min-height:250px;"
+                     data-ad-client="ca-pub-7438590583270235"
+                     data-ad-slot="6326521203"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+            
+            <div id="message" class="message"></div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Converting video, please wait...</p>
+            </div>            <div id="result" class="result">
+                <div class="video-info">
+                    <img id="thumbnail" src="" alt="YouTube Video Thumbnail" title="YouTube Video Thumbnail">
+                    <div class="info-text">
+                        <h3 id="video-title"></h3>
+                        <p id="video-duration"></p>
+                    </div>
+                </div>
+                <div class="download-section">
+                    <a id="download-link" href="#" class="download-btn" download aria-label="Download MP3 audio file">
+                        <i class="fas fa-download" aria-hidden="true"></i> Download MP3
+                    </a></div>
+            </div>            <!-- AdSense Ad Container (Middle) -->
+            <div class="ad-container" id="ad-container-middle">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block; min-width:250px; width:100%; min-height:250px;"
+                     data-ad-client="ca-pub-7438590583270235"
+                     data-ad-slot="6326521203"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+        
+        <!-- FAQ Section for SEO -->
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>How do I convert YouTube videos to MP3?</h3>
+                <p>Simply paste the YouTube video URL in the input field above and click "Convert to MP3". Once the conversion is complete, you'll see a download button to save your MP3 file.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the maximum video length I can convert?</h3>
+                <p>This converter supports videos up to 10 minutes in length. For longer videos, you may need to use a different service.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What audio quality will my MP3 have?</h3>
+                <p>Our converter provides high-quality MP3 files with excellent audio clarity. The typical bitrate is 192kbps or higher, depending on the original video quality.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is this service free to use?</h3>
+                <p>Yes, our YouTube to MP3 converter is completely free to use. We support our service through minimal advertisements.</p>
+            </div>            <!-- AdSense Ad Container (Bottom) -->
+            <div class="ad-container" id="ad-container-bottom">
+                <div class="ad-label">Advertisement</div>
+                <ins class="adsbygoogle"
+                     style="display:block; min-width:250px; width:100%; min-height:250px;"
+                     data-ad-client="ca-pub-7438590583270235"                     data-ad-slot="6326521203"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+            </div>
+        </div>
+        
+        <!-- SEO-friendly content section -->
+        <div class="seo-content">
+            <h2>The Best Free YouTube to MP3 Converter Online</h2>
+            <p>Welcome to our free YouTube to MP3 converter! Our tool makes it easy to convert any YouTube video to high-quality MP3 audio format. Whether you want to listen to music offline, save a podcast, or extract audio from educational videos, our YouTube to MP3 converter is the perfect solution.</p>
+            
+            <h3>How to Convert YouTube Videos to MP3</h3>
+            <ol>
+                <li><strong>Copy the URL</strong> of the YouTube video you want to convert</li>
+                <li><strong>Paste the URL</strong> in the input field above</li>
+                <li><strong>Click "Convert to MP3"</strong> and wait for the conversion process to complete</li>
+                <li><strong>Download your MP3 file</strong> and enjoy your audio offline</li>
+            </ol>
+            
+            <h3>Features of Our YouTube to MP3 Converter</h3>
+            <ul>
+                <li><strong>100% Free:</strong> No registration, no hidden fees</li>
+                <li><strong>High-Quality Audio:</strong> Get the best possible audio quality from YouTube videos</li>
+                <li><strong>Fast Conversion:</strong> Convert YouTube videos to MP3 in seconds</li>
+                <li><strong>Easy to Use:</strong> Simple interface with no technical knowledge required</li>
+                <li><strong>No Software Installation:</strong> Works directly in your browser</li>
+                <li><strong>Secure:</strong> We don't store your videos or personal data</li>
+            </ul>
+              <h3>Why Choose Our YouTube to MP3 Converter?</h3>
+            <p>There are many YouTube to MP3 converters available online, but ours stands out for its simplicity, speed, and quality. We've designed our tool to be as user-friendly as possible while delivering excellent results. Our converter works with all YouTube videos and provides high-quality MP3 files that you can listen to on any device.</p>
+              <p>Remember to always respect copyright laws and only download content that you have the right to access. Our YouTube to MP3 converter is intended for personal use only. Please read our <a href="terms.html">Terms of Service</a> and <a href="privacy.html">Privacy Policy</a> for more information.</p>
+            
+            <h3>YouTubeToMP3 - The Ultimate Solution for Music Lovers</h3>
+            <p>Looking for the best YouTubeToMP3 converter? You've found it! Our tool makes it incredibly easy to extract audio from YouTube videos and save them as high-quality MP3 files. Whether you're creating a personal music collection or need audio from educational content, our YouTubeToMP3 converter delivers exceptional results every time.</p>
+            
+            <p>Simply paste any YouTube URL, click convert, and download your MP3 file in seconds. No registration, no software installation, and absolutely free!</p>
+        </div>
+        
+        <div class="footer">
+            <p>Created with <i class="fas fa-heart"></i> | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p><p class="disclaimer">This tool is for personal use only. Respect copyright laws.</p>
+            <p class="copyright">© 2025 YouTube to MP3 Converter. All rights reserved.</p>
+        </div></div>    <script src="error-logger.js"></script>
+    <script src="cors-helper.js"></script>
+    <script src="router.js"></script>
+    <script src="script.js"></script>
+    
+    <!-- Structured Data for SEO -->    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "YouTubeToMP3 Converter",
+      "url": "https://vineethwilson15.github.io/",
+      "description": "Free online tool to convert YouTube videos to high-quality MP3 files quickly and easily. The best YouTubeToMP3 converter available online for free.",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "keywords": "YouTube to MP3, youtubetomp3, convert YouTube to MP3, YouTube MP3 converter, download YouTube audio",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Convert YouTube videos to MP3",
+        "High quality audio extraction",
+        "Fast conversion process",
+        "Free to use",
+        "No software installation required"
+      ],
+      "alternativeName": "YouTubeToMP3 Converter"
+    }
+    </script>
+      <!-- Initialize AdSense ads after page is loaded -->
+    <script>
+        window.addEventListener('load', function() {
+            // Add a small delay to ensure container sizes are calculated
+            setTimeout(function() {
+                try {
+                    // Get all ad containers
+                    const adElements = document.querySelectorAll('.adsbygoogle');
+                    
+                    // Push each ad individually
+                    adElements.forEach(function(adElement) {
+                        // Make sure the parent container is visible and has proper dimensions
+                        if (adElement.parentElement) {
+                            adElement.parentElement.style.display = 'block';
+                            // Ensure minimum width is set explicitly
+                            adElement.style.minWidth = '250px';
+                            adElement.style.minHeight = '250px';
+                        }
+                        
+                        // Push the ad
+                        try {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        } catch (innerErr) {
+                            console.error('Error pushing individual ad:', innerErr);
+                        }
+                    });
+                } catch (e) {
+                    console.error('AdSense initialization error:', e);
+                }
+            }, 100); // Small delay to ensure elements are properly sized
+        });
+    </script>
+</body>
+</html>

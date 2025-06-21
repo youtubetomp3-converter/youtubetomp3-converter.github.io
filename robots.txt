@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /youtubetomp3.html
+Allow: /youtube-to-mp3.html
+Allow: /youtube-mp3.html
+Disallow: /404.html
+
+# Sitemap
+Sitemap: https://vineethwilson15.github.io/sitemap.xml

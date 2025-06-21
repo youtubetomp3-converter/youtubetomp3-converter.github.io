@@ -1,0 +1,24 @@
+{  "name": "YouTube to MP3 Converter",
+  "short_name": "YT to MP3",
+  "description": "Convert YouTube videos to MP3 files with high audio quality",
+  "start_url": "./",
+  "display": "standalone",  "background_color": "#ffffff",
+  "theme_color": "#d32f2f",
+  "icons": [
+    {
+      "src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABmJLR0QA/wD/AP+gvaeTAAAA30lEQVRIie2UMQ6CQBBFn8aKUFEaD2BibWm8goUVR/AQHsLaM9jZWJtYcQWuYCIxQTkAhbNko9mwLKhoY+JL/s/M/J/Jbgb+4R5Kg+vVdcwQkTdV3YvIFHhcE0BESrEsayQiTVXdHvLOOYrFYiuKomaSJLNLwJdut1vKz3Ndl3K5TLfbJQzDdRzHuAz8Y8A54jh+xXFMLpej1+vdB3ANnBQUCoVBEARDz/OaZ0fUdd1X8/l8kQJYlrUZj8cjEalcCj7F4nQ6ebVabT+ZTGbAo9/v9z3PW2VZ3V+i9QblS2pdaVLmlQAAAABJRU5ErkJggg==",
+      "sizes": "24x24",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

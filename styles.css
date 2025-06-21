@@ -1,0 +1,363 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #d32f2f;
+}
+
+.converter-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.input-group {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #d32f2f;
+}
+
+button {
+    padding: 15px 25px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #b71c1c;
+}
+
+.duration-info {
+    text-align: center;
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.api-note {
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.message {
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 5px;
+    display: none;
+}
+
+.message.error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+    display: block;
+}
+
+.message.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    display: block;
+}
+
+.message.info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+    display: block;
+}
+
+.loading {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #d32f2f;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.result {
+    display: none;
+    margin-top: 30px;
+}
+
+.video-info {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.video-info img {
+    width: 120px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.info-text h3 {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.info-text p {
+    color: #666;
+}
+
+.download-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #4caf50;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-weight: bold;
+}
+
+.download-btn:hover {
+    background-color: #388e3c;
+}
+
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    color: #666;
+    font-size: 14px;
+    padding: 20px 0;
+}
+
+.footer a {
+    color: #d32f2f;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Ad Container Styles */
+.ad-container {
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    text-align: center;
+    min-height: 280px;
+    min-width: 250px;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.ad-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* FAQ Section Styles */
+.faq-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+}
+
+.faq-section h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 15px;
+}
+
+.faq-item h3 {
+    color: #d32f2f;
+    margin-bottom: 8px;
+    font-size: 18px;
+}
+
+.faq-item p {
+    color: #555;
+    line-height: 1.6;
+}
+
+.welcome-message {
+    background-color: #d32f2f;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out;
+    display: none; /* Initially hidden, will be shown via JavaScript */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; display: none; }
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 20px auto;
+        padding: 15px;
+    }
+    
+    .input-group {
+        flex-direction: column;
+    }
+    
+    input[type="text"] {
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+    
+    button {
+        border-radius: 5px;
+    }
+    
+    .video-info {
+        flex-direction: column;
+    }
+    
+    .video-info img {        
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    
+    /* Ensure ads have minimum width on mobile */
+    .ad-container {
+        min-width: 250px;
+        width: 100%;
+        padding: 5px;
+    }
+    
+    .adsbygoogle {
+        min-width: 250px !important;
+        min-height: 250px !important;
+    }
+}
+
+/* SEO Content Styling */
+.seo-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 40px;
+    margin-bottom: 40px;
+    line-height: 1.7;
+}
+
+.seo-content h2 {
+    color: #d32f2f;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.seo-content h3 {
+    color: #333;
+    margin: 25px 0 15px;
+    font-size: 20px;
+}
+
+.seo-content p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.seo-content ul, .seo-content ol {
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+.seo-content li {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.seo-content strong {
+    color: #333;
+}

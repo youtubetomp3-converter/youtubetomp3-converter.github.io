@@ -1,0 +1,32 @@
+{
+  "name": "youtube-to-mp3",
+  "version": "1.0.0",
+  "description": "A web application to convert YouTube videos to MP3 files",  
+  "main": "index.html",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "http-server -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate-icons": "node generate-icons.js"
+  },
+  "keywords": [
+    "youtube",
+    "mp3",
+    "converter",
+    "audio",
+    "download"
+  ],  
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.11.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vineethwilson15/YouTube-to-MP3.git"
+  },  
+  "bugs": {
+    "url": "https://github.com/vineethwilson15/YouTube-to-MP3/issues"
+  },
+  "homepage": "https://vineethwilson15.github.io/"
+}

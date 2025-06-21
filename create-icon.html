@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Icon</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        canvas {
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="iconCanvas" width="512" height="512"></canvas>
+        <div>
+            <button id="downloadBtn">Download Icon</button>
+        </div>
+    </div>
+    
+    <script>
+        // Get canvas and context
+        const canvas = document.getElementById('iconCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Draw icon background
+        ctx.fillStyle = '#d32f2f';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        // Draw YouTube play button
+        ctx.fillStyle = 'white';
+        ctx.beginPath();
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2 - 40;
+        const triangleSize = 100;
+        
+        ctx.moveTo(centerX - triangleSize/2, centerY - triangleSize/2);
+        ctx.lineTo(centerX + triangleSize/2, centerY);
+        ctx.lineTo(centerX - triangleSize/2, centerY + triangleSize/2);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Draw MP3 text
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 120px Arial';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('MP3', centerX, centerY + 100);
+        
+        // Draw download arrow
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 15;
+        ctx.beginPath();
+        const arrowX = centerX;
+        const arrowY = centerY + 180;
+        const arrowSize = 40;
+        
+        // Arrow stem
+        ctx.moveTo(arrowX, arrowY - arrowSize);
+        ctx.lineTo(arrowX, arrowY + arrowSize);
+        
+        // Arrow head
+        ctx.moveTo(arrowX - arrowSize, arrowY + arrowSize - 20);
+        ctx.lineTo(arrowX, arrowY + arrowSize);
+        ctx.lineTo(arrowX + arrowSize, arrowY + arrowSize - 20);
+        
+        ctx.stroke();
+        
+        // Download functionality
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            // Create download link
+            const downloadLink = document.createElement('a');
+            downloadLink.download = 'icon-512x512.png';
+            downloadLink.href = canvas.toDataURL('image/png');
+            downloadLink.click();
+            
+            // Create a smaller version (192x192)
+            const smallCanvas = document.createElement('canvas');
+            smallCanvas.width = 192;
+            smallCanvas.height = 192;
+            const smallCtx = smallCanvas.getContext('2d');
+            
+            // Draw the original canvas scaled down
+            smallCtx.drawImage(canvas, 0, 0, 512, 512, 0, 0, 192, 192);
+            
+            // Download the smaller version
+            const smallDownloadLink = document.createElement('a');
+            smallDownloadLink.download = 'icon-192x192.png';
+            smallDownloadLink.href = smallCanvas.toDataURL('image/png');
+            
+            // Short delay to ensure the first download starts before the second
+            setTimeout(() => {
+                smallDownloadLink.click();
+            }, 100);
+        });
+    </script>
+</body>
+</html>

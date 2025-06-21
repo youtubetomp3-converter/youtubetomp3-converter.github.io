@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - YouTube to MP3 Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google AdSense Script -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7438590583270235" crossorigin="anonymous"></script>
+    <style>
+        .offline-container {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .offline-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #d32f2f;
+        }
+        .offline-message {
+            margin-bottom: 30px;
+        }
+        .retry-button {
+            padding: 12px 24px;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .retry-button:hover {
+            background-color: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube to MP3 Converter</h1>
+        <div class="converter-box">
+            <div class="offline-container">
+                <div class="offline-icon">
+                    <i class="fas fa-wifi"></i>
+                </div>
+                <h2>You're offline</h2>
+                <p class="offline-message">Please check your internet connection and try again.</p>
+                <button class="retry-button" onclick="window.location.reload()">Retry</button>
+            </div>
+        </div>
+        <div class="footer">
+            <p>Created with <i class="fas fa-heart"></i> | Not for commercial use</p>
+            <p class="disclaimer">This tool is for personal use only. Respect copyright laws.</p>
+        </div>
+    </div>
+    <script>
+        // Check if we're back online
+        window.addEventListener('online', () => {
+            window.location.href = '/';
+        });
+    </script>
+</body>
+</html>
