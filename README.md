@@ -167,6 +167,6 @@ The application is live at: [https://youtubetomp3-converter.github.io/](https://
 
 ## Repository Information
 
-- **Repository URL**: [https://github.com/vineethwilson15/youtubetomp3-converter](https://github.com/youtubetomp3-converter/youtubetomp3-converter)
-- **Issues**: [https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues](https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues)
+- **Repository URL**: [https://github.com/youtubetomp3-converter/youtubetomp3-converter.github.io](https://github.com/youtubetomp3-converter/youtubetomp3-converter.github.io)
+- **Issues**: [https://github.com/youtubetomp3-converter/youtubetomp3-converter.github.io/issues](https://github.com/youtubetomp3-converter/youtubetomp3-converter.github.io/issues)
 - **GitHub Pages URL**: [https://youtubetomp3-converter.github.io/](https://youtubetomp3-converter.github.io/)

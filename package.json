@@ -20,13 +20,9 @@
   "license": "ISC",
   "dependencies": {
     "canvas": "^2.11.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/youtubetomp3-converter/youtubetomp3-converter.git"
-  },  
+  }, 
   "bugs": {
-    "url": "https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues"
+    "url": "https://github.com/youtubetomp3-converter/youtubetomp3-converter.github.io/issues"
   },
   "homepage": "https://youtubetomp3-converter.github.io/"
 }
