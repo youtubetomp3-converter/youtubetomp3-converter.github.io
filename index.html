@@ -82,16 +82,12 @@
                 <p>Maximum video length: 10 minutes</p>
                 <p class="api-note">This application uses free API services with limited quotas. If conversion fails,
                     please try again later.</p>
-            </div> <!-- AdSense Ad Container (Top) -->
-            <div class="ad-container" id="ad-container-top">
+            </div> <!-- AdSense Ad Container (Top) -->            <div class="ad-container" id="ad-container-top">
                 <div class="ad-label">Advertisement</div>
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:728px;height:90px"
                      data-ad-client="ca-pub-7438590583270235"
                      data-ad-slot="1787237657"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
 
             <div id="message" class="message"></div>
@@ -112,16 +108,12 @@
                         <i class="fas fa-download" aria-hidden="true"></i> Download MP3
                     </a>
                 </div>
-            </div> <!-- AdSense Ad Container (Middle) -->
-            <div class="ad-container" id="ad-container-middle">
+            </div> <!-- AdSense Ad Container (Middle) -->            <div class="ad-container" id="ad-container-middle">
                 <div class="ad-label">Advertisement</div>
                 <ins class="adsbygoogle"
                      style="display:inline-block;width:728px;height:90px"
                      data-ad-client="ca-pub-7438590583270235"
                      data-ad-slot="1787237657"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
 
@@ -147,8 +139,7 @@
                 <h3>Is this service free to use?</h3>
                 <p>Yes, our YouTube to MP3 converter is completely free to use. We support our service through minimal
                     advertisements.</p>
-            </div> <!-- AdSense Ad Container (Bottom) -->
-            <div class="ad-container" id="ad-container-bottom">
+            </div> <!-- AdSense Ad Container (Bottom) -->            <div class="ad-container" id="ad-container-bottom">
                 <div class="ad-label">Advertisement</div>
                 <ins class="adsbygoogle"
                      style="display:block"
@@ -156,9 +147,6 @@
                      data-ad-slot="5465245326"
                      data-ad-format="auto"
                      data-full-width-responsive="true"></ins>
-                <script>
-                     (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
             </div>
         </div>
 
@@ -252,41 +240,10 @@
       ],
       "alternativeName": "YouTubeToMP3 Converter"
     }
-    </script> <!-- Initialize AdSense ads after page is loaded -->
-    <script>
+    </script> <!-- Initialize AdSense ads after page is loaded -->    <script>
         window.addEventListener('load', function () {
-            // Add a small delay to ensure container sizes are calculated
-            setTimeout(function () {
-                try {
-                    // Use our enhanced AdSense helper if available
-                    if (typeof initAdsense === 'function') {
-                        initAdsense();
-                    } else {
-                        // Fallback to the original implementation
-                        const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
-
-                        // Only push ads that haven't been initialized yet
-                        adElements.forEach(function (adElement) {
-                            // Make sure the parent container is visible and has proper dimensions
-                            if (adElement.parentElement) {
-                                adElement.parentElement.style.display = 'block';
-                                // Ensure minimum width is set explicitly
-                                adElement.style.minWidth = '250px';
-                                adElement.style.minHeight = '250px';
-                            }
-
-                            // Push the ad
-                            try {
-                                (adsbygoogle = window.adsbygoogle || []).push({});
-                            } catch (innerErr) {
-                                console.error('Error pushing individual ad:', innerErr);
-                            }
-                        });
-                    }
-                } catch (e) {
-                    console.error('AdSense initialization error:', e);
-                }
-            }, 100); // Small delay to ensure elements are properly sized
+            // The initialization will be handled by adsense-helper.js
+            // No additional push calls needed here
         });
     </script>
 </body>

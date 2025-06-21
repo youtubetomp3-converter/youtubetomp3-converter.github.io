@@ -124,7 +124,15 @@ function initAdsense() {
             return;
         }
 
+        // Only select elements that don't already have a status attribute set
+        // This avoids the "already have ads in them" error
         const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status])');
+        
+        if (adElements.length === 0) {
+            console.log('No uninitiated AdSense elements found to initialize');
+            return;
+        }
+        
         console.log(`Initializing ${adElements.length} AdSense ad units`);
 
         adElements.forEach(ad => {
