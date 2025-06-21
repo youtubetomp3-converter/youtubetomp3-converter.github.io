@@ -4,6 +4,46 @@
  * to improve user experience during the AdSense approval process
  */
 
+// Check if tracking prevention is active
+function detectTrackingPrevention() {
+    return new Promise((resolve) => {
+        try {
+            // Try to access localStorage as a quick test
+            localStorage.setItem('adsense_test', 'test');
+            localStorage.removeItem('adsense_test');
+            
+            // Test for third-party cookie/storage blocking
+            const iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'about:blank';
+            document.body.appendChild(iframe);
+            
+            setTimeout(() => {
+                try {
+                    // Try to access storage in iframe context
+                    const iframeWindow = iframe.contentWindow;
+                    const testValue = 'testValue_' + Date.now();
+                    iframeWindow.localStorage.setItem('tracking_test', testValue);
+                    const retrieved = iframeWindow.localStorage.getItem('tracking_test');
+                    iframeWindow.localStorage.removeItem('tracking_test');
+                    
+                    const trackingPrevented = retrieved !== testValue;
+                    console.log('Tracking prevention detected:', trackingPrevented);
+                    resolve(trackingPrevented);
+                } catch (e) {
+                    console.log('Storage access error - tracking prevention likely active:', e);
+                    resolve(true); // Tracking prevention is likely active
+                } finally {
+                    document.body.removeChild(iframe);
+                }
+            }, 100);
+        } catch (e) {
+            console.log('Error detecting tracking prevention:', e);
+            resolve(true); // Assume tracking prevention is active if test fails
+        }
+    });
+}
+
 // Check if AdSense is blocked or not yet approved
 function checkAdSenseStatus() {
     // If we're in an iframe or local environment, skip the check
@@ -103,6 +143,33 @@ function initAdsense() {
     }
 }
 
+// Apply fallback behavior when tracking prevention is detected
+function applyTrackingPreventionFallback() {
+    console.log('Applying tracking prevention fallback measures');
+    
+    // Show a minimal notice in ad containers
+    const adContainers = document.querySelectorAll('.ad-container');
+    adContainers.forEach(container => {
+        // Hide any adsbygoogle elements
+        const adsElements = container.querySelectorAll('.adsbygoogle');
+        adsElements.forEach(ad => {
+            ad.style.display = 'none';
+        });
+        
+        // Only add the notice if it doesn't already exist
+        if (!container.querySelector('.tracking-notice')) {
+            const notice = document.createElement('div');
+            notice.className = 'tracking-notice';
+            notice.innerHTML = 'Ad display limited by browser privacy settings';
+            notice.style.textAlign = 'center';
+            notice.style.padding = '10px';
+            notice.style.fontSize = '12px';
+            notice.style.color = '#666';
+            container.appendChild(notice);
+        }
+    });
+}
+
 // Check if ads.txt is accessible
 function checkAdsTxt() {
     const adsTxtUrl = window.location.origin + '/ads.txt';
@@ -138,7 +205,9 @@ if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         checkAdSenseStatus,
         initAdsense,
-        checkAdsTxt
+        checkAdsTxt,
+        detectTrackingPrevention,
+        applyTrackingPreventionFallback
     };
 } else {
     // If loaded directly in browser, run checks after page load
@@ -147,6 +216,15 @@ if (typeof module !== 'undefined' && module.exports) {
         setTimeout(() => {
             checkAdsTxt();
             checkAdSenseStatus();
+            
+            // Check for tracking prevention and apply fallback if needed
+            detectTrackingPrevention().then(isTrackingPrevented => {
+                if (isTrackingPrevented) {
+                    applyTrackingPreventionFallback();
+                } else {
+                    initAdsense();
+                }
+            });
         }, 1000);
     });
 }
