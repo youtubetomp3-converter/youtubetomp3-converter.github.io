@@ -9,4 +9,4 @@ Allow: /youtube-mp3.html
 Disallow: /404.html
 
 # Sitemap
-Sitemap: https://vineethwilson15.github.io/sitemap.xml
+Sitemap: https://youtubetomp3-converter.github.io/sitemap.xml

@@ -29,7 +29,7 @@ This application uses:
 4. Navigate to Pages section
 5. Select the branch you want to deploy (usually `main`)
 6. Click Save
-7. The site is published at `https://vineethwilson15.github.io/`
+7. The site is published at `https://youtubetomp3-converter.github.io/`
 
 ## Configuration
 
@@ -163,10 +163,10 @@ Update the sitemap.xml with your actual GitHub Pages URL before deployment.
 
 ## Live Demo
 
-The application is live at: [https://vineethwilson15.github.io/](https://vineethwilson15.github.io/)
+The application is live at: [https://youtubetomp3-converter.github.io/](https://youtubetomp3-converter.github.io/)
 
 ## Repository Information
 
-- **Repository URL**: [https://github.com/vineethwilson15/YouTube-to-MP3](https://github.com/vineethwilson15/YouTube-to-MP3)
-- **Issues**: [https://github.com/vineethwilson15/YouTube-to-MP3/issues](https://github.com/vineethwilson15/YouTube-to-MP3/issues)
-- **GitHub Pages URL**: [https://vineethwilson15.github.io/](https://vineethwilson15.github.io/)
+- **Repository URL**: [https://github.com/vineethwilson15/youtubetomp3-converter](https://github.com/youtubetomp3-converter/youtubetomp3-converter)
+- **Issues**: [https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues](https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues)
+- **GitHub Pages URL**: [https://youtubetomp3-converter.github.io/](https://youtubetomp3-converter.github.io/)

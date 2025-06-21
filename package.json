@@ -23,10 +23,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vineethwilson15/YouTube-to-MP3.git"
+    "url": "git+https://github.com/youtubetomp3-converter/youtubetomp3-converter.git"
   },  
   "bugs": {
-    "url": "https://github.com/vineethwilson15/YouTube-to-MP3/issues"
+    "url": "https://github.com/youtubetomp3-converter/youtubetomp3-converter/issues"
   },
-  "homepage": "https://vineethwilson15.github.io/"
+  "homepage": "https://youtubetomp3-converter.github.io/"
 }
