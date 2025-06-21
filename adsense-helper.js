@@ -124,66 +124,44 @@ function initAdsense() {
             return;
         }
 
-        // Wait a short moment to ensure all page elements are fully loaded and rendered
-        setTimeout(() => {
-            // Only select elements that don't already have any status attribute set
-            // This avoids the "already have ads in them" error
-            const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status]):not([data-ad-status]):not([data-init-attempt])');
-            
-            if (adElements.length === 0) {
-                console.log('No uninitiated AdSense elements found to initialize');
-                return;
-            }
-            
-            console.log(`Initializing ${adElements.length} AdSense ad units`);
+        // Check if we've already initialized ads in this page load
+        if (window._adsenseInitialized) {
+            console.log('AdSense already initialized in this session, skipping duplicate initialization');
+            return;
+        }
 
-            // Process one ad at a time with a small delay between them
-            adElements.forEach((ad, index) => {
-                setTimeout(() => {
-                    try {
-                        // Check again if the ad has been initialized in the meantime
-                        if (ad.hasAttribute('data-adsbygoogle-status') || 
-                            ad.hasAttribute('data-ad-status') || 
-                            ad.hasAttribute('data-init-attempt') ||
-                            ad.innerHTML.trim() !== '') {
-                            console.log('Ad already initialized or not empty, skipping.');
-                            return;
-                        }
-                        
-                        // Add a specific data attribute to track our initialization attempt
-                        ad.setAttribute('data-init-attempt', 'true');
-                        
-                        // Make sure parent container is visible with adequate size
-                        if (ad.parentElement) {
-                            ad.parentElement.style.display = 'block';
-                            if (!ad.style.minWidth) ad.style.minWidth = '250px';
-                            if (!ad.style.minHeight) ad.style.minHeight = '250px';
-                        }
-                        
-                        try {
-                            (adsbygoogle = window.adsbygoogle || []).push({});
-                            console.log('Ad push successful for element', ad);
-                        } catch (pushError) {
-                            // If we get an "already have ads" error, mark this element
-                            console.error('Error pushing ad:', pushError.message || pushError);
-                            ad.setAttribute('data-init-error', pushError.message || 'push-error');
-                            
-                            // If we get the specific "already have ads" error, mark all ads as attempted
-                            if (pushError.message && pushError.message.includes('already have ads')) {
-                                document.querySelectorAll('.adsbygoogle:not([data-init-attempt])').forEach(el => {
-                                    el.setAttribute('data-init-attempt', 'blocked-by-error');
-                                });
-                                console.warn('Marked all remaining ads as attempted due to "already have ads" error');
-                            }
-                        }
-                    } catch (innerErr) {
-                        console.error('Error in ad initialization process:', innerErr);
-                        // Mark the ad as having an error
-                        ad.setAttribute('data-init-error', 'true');
-                    }
-                }, index * 150); // Slightly longer stagger to reduce race conditions
-            });
-        }, 300); // Slightly longer delay to ensure DOM is fully loaded
+        // Flag to prevent multiple initialization attempts in same session
+        window._adsenseInitialized = true;
+        
+        // Handle mixed AMP and non-AMP pages
+        const hasAmp = document.querySelector('amp-ad, amp-auto-ads');
+        
+        // On AMP pages, don't manually initialize ads as AMP will handle them
+        if (hasAmp) {
+            console.log('AMP ads detected on page - skipping manual initialization');
+            // Just push the array once to initialize any non-AMP ads that might exist
+            try {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            } catch (ampError) {
+                // Ignore expected errors on AMP pages
+                console.log('Expected push error on AMP page:', ampError.message || ampError);
+            }
+            return;
+        }
+
+        // On regular pages, initialize each ad unit individually
+        const adElements = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status]):not([data-ad-status])');
+        
+        if (adElements.length === 0) {
+            console.log('No uninitiated AdSense elements found to initialize');
+            return;
+        }
+        
+        console.log(`Found ${adElements.length} AdSense ad units to initialize`);
+        
+        // Single push for all ads - recommended approach by Google
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        console.log('AdSense initialization pushed');
     } catch (e) {
         console.error('AdSense initialization error:', e);
     }
@@ -257,20 +235,27 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 } else {
     // If loaded directly in browser, run checks after page load
-    window.addEventListener('load', function () {
-        // Delay checks to ensure page is fully loaded
-        setTimeout(() => {
-            checkAdsTxt();
-            checkAdSenseStatus();
-            
-            // Check for tracking prevention and apply fallback if needed
-            detectTrackingPrevention().then(isTrackingPrevented => {
-                if (isTrackingPrevented) {
-                    applyTrackingPreventionFallback();
-                } else {
-                    initAdsense();
-                }
-            });
-        }, 1000);
+    // Use DOMContentLoaded instead of load for faster initialization
+    // This helps with the race condition between AMP and regular AdSense
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check for tracking prevention and apply fallback if needed
+        detectTrackingPrevention().then(isTrackingPrevented => {
+            if (isTrackingPrevented) {
+                applyTrackingPreventionFallback();
+            } else {
+                // Only initialize once and with a short delay
+                setTimeout(() => {
+                    if (!window._adsenseInitialized) {
+                        initAdsense();
+                    }
+                    
+                    // Run additional checks with a longer delay
+                    setTimeout(() => {
+                        checkAdsTxt();
+                        checkAdSenseStatus();
+                    }, 2000);
+                }, 100);
+            }
+        });
     });
 }
