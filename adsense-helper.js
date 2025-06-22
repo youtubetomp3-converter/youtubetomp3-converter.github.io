@@ -44,6 +44,67 @@ function detectTrackingPrevention() {
     });
 }
 
+// Check if the current page is suitable for ads (has sufficient content)
+function hasAdequateContent() {
+    // Check if we're on a special page that shouldn't have ads
+    const path = window.location.pathname.toLowerCase();
+    
+    // Don't show ads on error pages, offline pages, or pages under construction
+    if (path.includes('404') || 
+        path.includes('error') || 
+        path.includes('offline') || 
+        path.includes('construction')) {
+        console.log('Page not suitable for ads: special page');
+        return false;
+    }
+    
+    // Don't show ads on pages with minimal content
+    const contentElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, li, article, section');
+    if (contentElements.length < 3) {
+        console.log('Page not suitable for ads: insufficient content elements');
+        return false;
+    }
+    
+    // Calculate total content length - pages with very little text shouldn't show ads
+    let totalTextLength = 0;
+    contentElements.forEach(el => {
+        totalTextLength += el.textContent.trim().length;
+    });
+    
+    if (totalTextLength < 300) { // Requiring at least 300 characters of text content
+        console.log('Page not suitable for ads: insufficient text content');
+        return false;
+    }
+    
+    return true;
+}
+
+// Initialize AdSense with content checks
+function initializeAdSense() {
+    // If this page doesn't have adequate content, remove ad slots
+    if (!hasAdequateContent()) {
+        console.log('Removing ad slots due to insufficient content');
+        const adElements = document.querySelectorAll('.adsbygoogle, amp-ad, .ad-container');
+        adElements.forEach(el => {
+            el.style.display = 'none';
+            // If it's a container, add a data attribute to mark it as inactive
+            if (el.classList.contains('ad-container')) {
+                el.setAttribute('data-adsense-disabled', 'content-policy');
+            }
+        });
+        return;
+    }
+
+    // Initialize AdSense ads if the page has adequate content
+    (adsbygoogle = window.adsbygoogle || []).push({});
+    
+    // Wait for the DOM to be fully ready
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check AdSense status
+        checkAdSenseStatus();
+    });
+}
+
 // Check if AdSense is blocked or not yet approved
 function checkAdSenseStatus() {
     // If we're in an iframe or local environment, skip the check
@@ -97,6 +158,15 @@ function checkAdSenseStatus() {
         }
     }, 2000);
 }
+
+// Log AdSense status for debugging
+function logAdStatus(status) {
+    // Implementation depends on your logging needs
+    console.log('AdSense status logged:', status);
+}
+
+// Run initialization
+initializeAdSense();
 
 // Log AdSense status to localStorage for diagnostics
 function logAdStatus(status) {
