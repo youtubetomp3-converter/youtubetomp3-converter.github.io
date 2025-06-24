@@ -126,29 +126,10 @@ To test the application locally with all features (including the Service Worker)
 
 **Note:** Service Workers require HTTPS or localhost to function. They will not work when opening HTML files directly from the filesystem.
 
-## Monetization with Google AdSense
-
-This application is configured for monetization with Google AdSense. To set up AdSense:
-
-1. Create a Google AdSense account at https://www.google.com/adsense/
-2. Apply for AdSense approval
-3. The application is already set up with AdSense publisher ID: ca-pub-7438590583270235
-   - If you need to use your own AdSense account, replace this ID with your actual publisher ID
-   - Update the ad slots as needed for your specific implementation
-
 The application includes:
-- Pre-configured ad containers for top, middle, and bottom ad placements
-- Privacy Policy and Terms of Service pages (required for AdSense approval)
+- Privacy Policy and Terms of Service pages
 - SEO optimization for better discoverability
-- Responsive ad placements that work on all devices
-
-### AdSense Compliance
-
-To ensure AdSense compliance:
-- Do not click on your own ads
-- Do not encourage users to click on ads
-- Ensure all content complies with AdSense Program Policies
-- Monitor ad performance and make adjustments as needed
+- Responsive design that works on all devices
 
 ## SEO Optimization
 

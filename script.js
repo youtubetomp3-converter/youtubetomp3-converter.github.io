@@ -6,28 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingDiv = document.getElementById('loading');
     const resultDiv = document.getElementById('result');
     const thumbnailImg = document.getElementById('thumbnail');
-    const videoTitleEl = document.getElementById('video-title');
-    const videoDurationEl = document.getElementById('video-duration');
+    const videoTitleEl = document.getElementById('video-title');    const videoDurationEl = document.getElementById('video-duration');
     const downloadLink = document.getElementById('download-link');
     const welcomeBanner = document.getElementById('welcome-banner');
     
-    // Check for tracking prevention and storage access issues
-    const checkStorageAccess = function() {
-        if (window.storageAccess) {
-            // Log storage access status for debugging
-            console.log('Storage access status:', window.storageAccess);
-            
-            // If all storage is blocked, show a message
-            if (!window.storageAccess.localStorage && 
-                !window.storageAccess.sessionStorage && 
-                !window.storageAccess.cookies) {
-                console.warn('All storage access is blocked by browser privacy settings');
-            }
-        }
-    };
-    
-    // Call storage access check
-    checkStorageAccess();
     
     // Show welcome message with a slight delay
     setTimeout(() => {

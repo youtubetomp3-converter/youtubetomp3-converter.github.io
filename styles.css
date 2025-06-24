@@ -319,13 +319,7 @@ button:hover {
     .ad-container {
         min-width: 250px;
         width: 100%;
-        padding: 5px;
-    }
-    
-    .adsbygoogle {
-        min-width: 250px !important;
-        min-height: 250px !important;
-    }
+        padding: 5px;    }
 }
 
 /* SEO Content Styling */

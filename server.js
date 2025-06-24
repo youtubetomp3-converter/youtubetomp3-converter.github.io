@@ -40,23 +40,6 @@ const MIME_TYPES = {
 const server = http.createServer((req, res) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
   
-  // Special handling for ads.txt
-  if (req.url === '/ads.txt') {
-    fs.readFile('./ads.txt', (err, content) => {
-      if (err) {
-        res.writeHead(500);
-        res.end(`Server Error: ${err.code}`);
-        return;
-      }
-      res.writeHead(200, { 
-        'Content-Type': 'text/plain',
-        'Cache-Control': 'no-cache' 
-      });
-      res.end(content, 'utf-8');
-    });
-    return;
-  }
-  
   // Handle root path
   let filePath = '.' + req.url;
   if (filePath === './') {
